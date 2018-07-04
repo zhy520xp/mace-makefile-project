@@ -1,6 +1,5 @@
 # mace-makefile-project
-Mace是小米发布的移动端深度学习加速库。但是现在不支持离线编译和arm-linux交叉编译，为了快速验证Mace在嵌入式端的性能，故把MACE的源码和依赖提出来，搞了一个
-可以使用MakeFile进行交叉编译libmace.a的工程，省去了Bazel编译的麻烦。
+Mace是小米发布的移动端深度学习加速库。但是现在不支持离线编译和arm-linux交叉编译，为了快速验证Mace在嵌入式端的性能，故把MACE的源码和依赖提出来，搞了一个可以使用MakeFile进行交叉编译libmace.a的工程，省去了Bazel编译的麻烦。  
 
 1.如果你要在3519上运行mace，那么请依次执行以下命令(protobuf的库已经编好了)
   cd mace;
