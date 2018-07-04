@@ -1,0 +1,1 @@
+./ --model=mobilenet_v1.pb --input=input  --output=MobilenetV1/Predictions/Reshape_1 --input_shape=1,224,224,3 --output_shape=1,1001  --input_file=dog.npy --output_file=mace.out model_data_file=mobilenet_v1.data --device=CPU
