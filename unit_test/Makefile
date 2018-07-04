@@ -18,9 +18,9 @@ DEP_INC_DIR += -I$(TOP_DIR)/include/protobuf3.4.0
 
 ####################ld flag###################
 LDFLAGS+= $(TOP_DIR)/library/mace/libmace.a 
-LDFLAGS+= $(TOP_DIR)/library/protobuf3.4.0/libprotobuf.a
+#LDFLAGS+= $(TOP_DIR)/library/protobuf3.4.0/libprotobuf.a
 LDFLAGS+= $(TOP_DIR)/library/protobuf3.4.0/libprotobuf-lite.a
-LDFLAGS+= $(TOP_DIR)/library/protobuf3.4.0/libprotoc.a
+#LDFLAGS+= $(TOP_DIR)/library/protobuf3.4.0/libprotoc.a
 #LDFLAGS+= -L$(TOP_DIR)/library/opencv2.4.9 
 #LDFLAGS+= -lopencv_video -lopencv_highgui -lopencv_imgproc -lopencv_core 
 #LDFLAGS+= -llibjpeg -lz
