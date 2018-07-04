@@ -1,0 +1,112 @@
+syntax = "proto2";
+
+package mace;
+
+option optimize_for = LITE_RUNTIME;
+
+// For better compatibility,
+// the mace.proto is refered from tensorflow and caffe2.
+
+enum NetMode {
+  INIT = 0;
+  NORMAL = 1;
+}
+
+enum DataType {
+  DT_INVALID = 0;
+  DT_FLOAT = 1;
+  DT_UINT8 = 2;
+  DT_HALF = 3;
+  DT_INT32 = 4;
+}
+
+message ConstTensor {
+  repeated int64 dims = 1;
+  optional DataType data_type = 2 [default = DT_FLOAT];
+  repeated float float_data = 3 [packed = true];
+  repeated int32 int32_data = 4 [packed = true];
+  optional string name = 5;
+  optional int64 offset = 6;
+  optional int64 data_size = 7;
+
+  optional uint32 node_id = 100;
+}
+
+message Argument {
+  optional string name = 1;
+  optional float f = 2;
+  optional int64 i = 3;
+  optional bytes s = 4;
+  repeated float floats = 5;
+  repeated int64 ints = 6;
+}
+
+// for hexagon mace-nnlib
+message NodeInput {
+  optional int32 node_id = 1;
+  optional int32 output_port = 2;
+}
+
+message OutputShape {
+  repeated int64 dims = 1;
+}
+
+message OperatorDef {
+  repeated string input = 1;
+  repeated string output = 2;
+  optional string name = 3;
+  optional string type = 4;
+  repeated Argument arg = 5;
+  repeated OutputShape output_shape = 6;
+  repeated DataType output_type = 7;
+
+  repeated int32 mem_id = 10;
+
+  // for hexagon mace-nnlib
+  optional uint32 node_id = 100;
+  optional uint32 op_id = 101;
+  optional uint32 padding = 102;
+  repeated NodeInput node_input = 103;
+  repeated int32 out_max_byte_size = 104;  // only support 32-bit len
+}
+
+// for memory optimization
+message MemoryBlock {
+  optional int32 mem_id = 1;
+  optional uint32 x = 2;
+  optional uint32 y = 3;
+}
+message MemoryArena {
+  repeated MemoryBlock mem_block = 1;
+}
+
+// for hexagon mace-nnlib
+message InputInfo {
+  optional string name = 1;
+  optional int32 node_id = 2;
+  repeated int32 dims = 3;
+  optional int32 max_byte_size = 4;  // only support 32-bit len
+  optional DataType data_type = 5 [default = DT_FLOAT];
+}
+message OutputInfo {
+  optional string name = 1;
+  optional int32 node_id = 2;
+  repeated int32 dims = 3;
+  optional int32 max_byte_size = 4;  // only support 32-bit len
+  optional DataType data_type = 5 [default = DT_FLOAT];
+}
+
+message NetDef {
+  optional string name = 1;
+  repeated OperatorDef op = 2;
+  optional string version = 3;
+  repeated Argument arg = 4;
+  repeated ConstTensor tensors = 5;
+
+  // for mem optimization
+  optional MemoryArena mem_arena = 10;
+
+  // for hexagon mace-nnlib
+  repeated InputInfo input_info = 100;
+  repeated OutputInfo output_info = 101;
+}
