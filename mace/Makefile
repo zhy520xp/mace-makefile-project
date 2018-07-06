@@ -1,16 +1,21 @@
-CXX = arm-hisiv600-linux-g++
-CC = arm-hisiv600-linux-gcc
-AR = arm-hisiv600-linux-ar cqs
+CXX = aarch64-himix100-linux-g++
+CC = aarch64-himix100-linux-gcc
+AR = aarch64-himix100-linux-ar cqs
 
 TOP_DIR = ..
 
+PLATFORM = GPU
+
 TARGET_LIB = libmace.a
+
+ifeq ($(PLATFORM),GPU)
+CXX_SOURCE += $(TOP_DIR)/mace/codegen/opencl/opencl_encrypt_program.cc
+CXX_SOURCE += $(TOP_DIR)/mace/codegen/tuning/tuning_params.cc
+CXX_SOURCE += $(TOP_DIR)/mace/codegen/version/version.cc
+endif
+
 ####################proto source file###################
 CXX_SOURCE += $(TOP_DIR)/mace/proto/mace.pb.cc
-####################test source file###################
-#CXX_SOURCE += $(TOP_DIR)/mace/test/mace_api_exception_test.cc
-#CXX_SOURCE += $(TOP_DIR)/mace/test/mace_api_mt_test.cc
-#CXX_SOURCE += $(TOP_DIR)/mace/test/mace_api_test.cc
 
 ####################utils source file################### 
 CXX_SOURCE += $(TOP_DIR)/mace/utils/logging.cc
@@ -19,12 +24,13 @@ CXX_SOURCE += $(TOP_DIR)/mace/utils/tuner_production.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/utils/tuner_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/utils/tuner_development.cc
 
-####################kernels source file################### 
+####################kernels arm source file################### 
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/conv_pool_2d_util.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/kernels/gemm_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/gemm.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/kernels/matmul_benchmark.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/kernels/memory_benchmark.cc
+
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/conv_2d_neon_1x1.cc
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/conv_2d_neon_1x7.cc
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/conv_2d_neon_1x15.cc
@@ -36,6 +42,41 @@ CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/conv_2d_neon_15x1.cc
 #CXX_SOURCE += $(TOP_DIR)/source/kernels/arm/conv_winograd_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/conv_winograd.cc
 CXX_SOURCE += $(TOP_DIR)/mace/kernels/arm/depthwise_conv2d_neon_3x3.cc
+
+####################kernels opencl source file################### 
+ifeq ($(PLATFORM),GPU)
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/activation.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/addn.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/batch_norm.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/bias_add.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/buffer_to_image.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/channel_shuffle.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/concat.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/conv_2d_1x1.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/conv_2d_3x3.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/conv_2d_general.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/conv_2d.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/deconv_2d_opencl.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/depth_to_space.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/depthwise_conv.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/eltwise.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/fully_connected.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/helper.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/image_to_buffer.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/matmul.cc
+#CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/out_of_range_check_test.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/pad.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/pooling.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/reduce_mean_opencl.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/resize_bilinear.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/slice.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/softmax.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/space_to_batch.cc
+CXX_SOURCE += $(TOP_DIR)/mace/kernels/opencl/winograd_transform.cc
+CXX_SOURCE += $(TOP_DIR)/mace/ops/buffer_to_image.cc
+CXX_SOURCE += $(TOP_DIR)/mace/ops/image_to_buffer.cc
+endif
+
 ####################ops source file################### 
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/activation_benchmark.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/activation_test.cc
@@ -53,7 +94,6 @@ CXX_SOURCE += $(TOP_DIR)/mace/ops/batch_to_space.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/bias_add.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/buffer_to_image_benchmark.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/buffer_to_image_test.cc
-#CXX_SOURCE += $(TOP_DIR)/mace/ops/buffer_to_image.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/cast_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/cast.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/channel_shuffle_benchmark.cc
@@ -88,7 +128,6 @@ CXX_SOURCE += $(TOP_DIR)/mace/ops/fully_connected.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/gather.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/identity_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/identity.cc
-#CXX_SOURCE += $(TOP_DIR)/mace/ops/image_to_buffer.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/local_response_norm_benchmark.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/local_respons_norm_test.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/local_response_norm.cc
@@ -141,7 +180,17 @@ CXX_SOURCE += $(TOP_DIR)/mace/ops/winograd_inverse_transform.cc
 #CXX_SOURCE += $(TOP_DIR)/mace/ops/winograd_transform_benchmark.cc
 CXX_SOURCE += $(TOP_DIR)/mace/ops/winograd_transform.cc
 ####################core source file###################
+
+ifeq ($(PLATFORM),CPU)
 CXX_SOURCE += $(TOP_DIR)/mace/core/runtime/cpu/cpu_runtime.cc
+endif
+
+ifeq ($(PLATFORM),GPU)
+CXX_SOURCE += $(TOP_DIR)/mace/core/runtime/opencl/opencl_allocator.cc
+CXX_SOURCE += $(TOP_DIR)/mace/core/runtime/opencl/opencl_runtime.cc
+CXX_SOURCE += $(TOP_DIR)/mace/core/runtime/opencl/opencl_wrapper.cc
+endif
+
 CXX_SOURCE += $(TOP_DIR)/mace/core/allocator.cc
 CXX_SOURCE += $(TOP_DIR)/mace/core/arg_helper.cc
 CXX_SOURCE += $(TOP_DIR)/mace/core/file_storage.cc
@@ -165,9 +214,14 @@ OBJ_CPP := $(patsubst %.cc, %.o, $(CXX_SOURCE))
 OBJ_C := $(patsubst %.c, %.o, $(C_SOURCE))
 
 DEFINE_MACRO := 
+ifeq ($(PLATFORM),CPU)
+CPPFLAGS := -O3 -std=c++11 -fpermissive -DMACE_ENABLE_NEON -DMACE_ENABLE_OPENMP
+endif
 
-CPPFLAGS := -O3 -std=c++11 -fpermissive -DMACE_ENABLE_NEON
-CPPFLAGS += -O3 -mfloat-abi=softfp -mfpu=neon-vfpv4
+ifeq ($(PLATFORM),GPU)
+CPPFLAGS := -O3 -std=c++11 -fpermissive -DMACE_ENABLE_OPENCL
+endif
+
 CFLAGS := -Wall -O3
 CPPFLAGS += $(DEP_INC_DIR) $(DEFINE_MACRO) 
 CFLAGS += $(DEP_INC_DIR) $(DEFINE_MACRO) 

@@ -37,7 +37,7 @@ extern const std::map<std::string, std::vector<unsigned char>>
     kEncryptedProgramMap;
 
 void SetGPUHints(GPUPerfHint gpu_perf_hint, GPUPriorityHint gpu_priority_hint) {
-  VLOG(1) << "Set GPU configurations, gpu_perf_hint: " << gpu_perf_hint
+  LOG(WARNING) << "Set GPU configurations, gpu_perf_hint: " << gpu_perf_hint
           << ", gpu_priority_hint: " << gpu_priority_hint;
   OpenCLRuntime::Configure(gpu_perf_hint, gpu_priority_hint);
 }
@@ -353,7 +353,7 @@ OpenCLRuntime::OpenCLRuntime():
       const std::string device_version = device.getInfo<CL_DEVICE_VERSION>();
       opencl_version_ = ParseDeviceVersion(device_version);
 
-      VLOG(1) << "Using device: " << device_name;
+      LOG(WARNING) << "Using device: " << device_name;
       break;
     }
   }
@@ -558,6 +558,7 @@ void OpenCLRuntime::BuildProgramFromSource(
     const std::string &build_options_str,
     cl::Program *program) {
   // Find from source
+
   auto it_source = kEncryptedProgramMap.find(program_name);
   if (it_source != kEncryptedProgramMap.end()) {
     cl::Program::Sources sources;
@@ -614,6 +615,7 @@ void OpenCLRuntime::BuildProgramFromSource(
 
     VLOG(3) << "Program from source: " << built_program_key;
   }
+  
 }
 
 void OpenCLRuntime::BuildProgram(const std::string &program_name,

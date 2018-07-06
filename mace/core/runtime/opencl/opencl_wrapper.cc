@@ -252,6 +252,7 @@ bool OpenCLLibraryImpl::Load() {
     return true;
   }
 
+#if 0
   const std::vector<std::string> paths = {
     "libOpenCL.so",
 #if defined(__aarch64__)
@@ -270,9 +271,16 @@ bool OpenCLLibraryImpl::Load() {
     "/system/lib/egl/libGLES_mali.so",
 #endif
   };
+#endif
+#if 1
+  const std::vector<std::string> paths = {
+    "./opencl_library/libOpenCL.so",
+    "./opencl_library/libmali.so"
+  };
+#endif
 
   for (const auto &path : paths) {
-    VLOG(2) << "Loading OpenCL from " << path;
+    LOG(WARNING) << "Loading OpenCL from " << path;
     void *handle = LoadFromPath(path);
     if (handle != nullptr) {
       handle_ = handle;
