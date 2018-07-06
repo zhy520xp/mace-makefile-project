@@ -28,7 +28,7 @@ Mace是小米发布的移动端深度学习加速库。但是现在不支持离�
 (2).https://blog.csdn.net/adrian169/article/details/9051839  
     可以按照这个链接方法来编译  
 (3).把编译好的libprotoc.a和libprotobuf.a和libproto-lite.a拷贝到library/mace/目录下   
-(4).如果是使用CPU来运行mace，接下来按照1方法运行 
+(4).如果是使用CPU来运行mace，接下来按照1方法运行  
 (5).如果是使用GPU来运行mace，参考2，只是在运行demo前，需要先把opencl的库libopencl.so，libmali.so放到opencl_library下。  
     特别需要注意的是，嵌入式端运行GPU需要保证GPU的驱动加载好了，不然运行demo的时候会“Kernel module may not have been loaded”的错误。
     如果GPU运行时除了libopencl.so，libmali.so之外还有其他动态库，请在mace/core/runtime/opencl/opencl_wrapper.cc的278行加上库路径即可。  
