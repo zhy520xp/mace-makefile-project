@@ -1,0 +1,3257 @@
+op {
+  input: "mace_input_node_input"
+  output: "input"
+  name: "input"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 1
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+  output_shape {
+    dims: 1
+    dims: 224
+    dims: 224
+    dims: 3
+  }
+  mem_id: 20000
+}
+op {
+  input: "_MobilenetV1_Conv2d_0_weights"
+  output: "MobilenetV1/Conv2d_0/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_0/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_0_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "input"
+  input: "MobilenetV1/Conv2d_0/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_1_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_1_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_1_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_1_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_0/Relu6:0"
+  input: "MobilenetV1/Conv2d_1_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 32
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_1_pointwise_weights"
+  output: "MobilenetV1/Conv2d_1_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_1_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_1_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_1_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 112
+    dims: 112
+    dims: 64
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_2_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_2_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_2_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_2_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_1_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_2_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 64
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_2_pointwise_weights"
+  output: "MobilenetV1/Conv2d_2_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_2_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_2_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_2_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_3_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_3_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_3_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_3_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_2_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_3_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_3_pointwise_weights"
+  output: "MobilenetV1/Conv2d_3_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_3_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_3_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_3_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 56
+    dims: 56
+    dims: 128
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_4_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_4_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_4_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_4_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_3_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_4_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 128
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_4_pointwise_weights"
+  output: "MobilenetV1/Conv2d_4_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_4_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_4_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_4_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_5_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_5_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_5_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_5_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_4_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_5_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_5_pointwise_weights"
+  output: "MobilenetV1/Conv2d_5_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_5_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_5_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_5_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 28
+    dims: 28
+    dims: 256
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_6_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_6_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_6_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_6_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_5_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_6_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 256
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_6_pointwise_weights"
+  output: "MobilenetV1/Conv2d_6_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_6_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_6_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_6_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_7_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_7_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_7_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_7_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_6_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_7_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_7_pointwise_weights"
+  output: "MobilenetV1/Conv2d_7_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_7_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_7_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_7_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_8_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_8_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_8_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_8_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_7_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_8_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_8_pointwise_weights"
+  output: "MobilenetV1/Conv2d_8_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_8_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_8_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_8_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_9_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_9_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_9_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_9_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_8_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_9_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_9_pointwise_weights"
+  output: "MobilenetV1/Conv2d_9_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_9_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_9_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_9_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_10_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_10_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_10_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_10_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_9_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_10_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_10_pointwise_weights"
+  output: "MobilenetV1/Conv2d_10_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_10_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_10_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_10_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_11_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_11_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_11_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_11_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_10_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_11_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_11_pointwise_weights"
+  output: "MobilenetV1/Conv2d_11_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_11_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_11_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_11_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 14
+    dims: 14
+    dims: 512
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_12_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_12_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_12_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_12_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_11_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_12_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 512
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_12_pointwise_weights"
+  output: "MobilenetV1/Conv2d_12_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_12_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_12_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_12_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  mem_id: 20001
+}
+op {
+  input: "_MobilenetV1_Conv2d_13_depthwise_depthwise_weights"
+  output: "MobilenetV1/Conv2d_13_depthwise/depthwise_weights_0_b2i"
+  name: "MobilenetV1/Conv2d_13_depthwise/depthwise_weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 6
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_13_depthwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_12_pointwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_13_depthwise/depthwise_weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6"
+  type: "DepthwiseConv2d"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Conv2d_13_pointwise_weights"
+  output: "MobilenetV1/Conv2d_13_pointwise/weights_0_b2i"
+  name: "MobilenetV1/Conv2d_13_pointwise/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_MobilenetV1_Conv2d_13_pointwise_BatchNorm_offset"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/offset_0_b2i"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/offset_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_depthwise/Relu6:0"
+  input: "MobilenetV1/Conv2d_13_pointwise/weights_0_b2i"
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/BatchNorm/offset_0_b2i"
+  output: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  name: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "activation"
+    s: "RELUX"
+  }
+  arg {
+    name: "max_limit"
+    f: 6.0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 7
+    dims: 7
+    dims: 1024
+  }
+  mem_id: 20001
+}
+op {
+  input: "MobilenetV1/MobilenetV1/Conv2d_13_pointwise/Relu6:0"
+  output: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  name: "MobilenetV1/Logits/AvgPool_1a/AvgPool"
+  type: "Pooling"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "pooling_type"
+    i: 1
+  }
+  arg {
+    name: "padding"
+    i: 0
+  }
+  arg {
+    name: "strides"
+    ints: 2
+    ints: 2
+  }
+  arg {
+    name: "kernels"
+    ints: 7
+    ints: 7
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1024
+  }
+  mem_id: 20002
+}
+op {
+  input: "_MobilenetV1_Logits_Conv2d_1c_1x1_weights"
+  output: "MobilenetV1/Logits/Conv2d_1c_1x1/weights_0_b2i"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/weights_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 0
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "_MobilenetV1_Logits_Conv2d_1c_1x1_biases"
+  output: "MobilenetV1/Logits/Conv2d_1c_1x1/biases_0_b2i"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/biases_0_b2i"
+  type: "BufferToImage"
+  arg {
+    name: "buffer_type"
+    i: 2
+  }
+  arg {
+    name: "mode"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+op {
+  input: "MobilenetV1/Logits/AvgPool_1a/AvgPool:0"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/weights_0_b2i"
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/biases_0_b2i"
+  output: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D:0"
+  name: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D"
+  type: "Conv2D"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "padding"
+    i: 1
+  }
+  arg {
+    name: "strides"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "dilations"
+    ints: 1
+    ints: 1
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 1
+    dims: 1
+    dims: 1001
+  }
+  mem_id: 20001
+}
+op {
+  input: "MobilenetV1/Logits/Conv2d_1c_1x1/Conv2D:0"
+  output: "MobilenetV1/Logits/SpatialSqueeze:0"
+  name: "MobilenetV1/Logits/SpatialSqueeze"
+  type: "Squeeze"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "axis"
+    ints: 1
+    ints: 2
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+  mem_id: 20001
+}
+op {
+  input: "MobilenetV1/Logits/SpatialSqueeze:0"
+  output: "MobilenetV1/Predictions/Reshape_1"
+  name: "MobilenetV1/Predictions/Softmax"
+  type: "Softmax"
+  arg {
+    name: "T"
+    i: 3
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  output_shape {
+    dims: 1
+    dims: 1001
+  }
+  mem_id: 20002
+}
+op {
+  input: "MobilenetV1/Predictions/Reshape_1"
+  output: "mace_output_node_MobilenetV1/Predictions/Reshape_1"
+  name: "mace_output_node_MobilenetV1/Predictions/Reshape_1"
+  type: "ImageToBuffer"
+  arg {
+    name: "buffer_type"
+    i: 1
+  }
+  arg {
+    name: "data_format"
+    i: 0
+  }
+  arg {
+    name: "device"
+    i: 2
+  }
+  arg {
+    name: "T"
+    i: 3
+  }
+}
+arg {
+  name: "filter_format"
+  i: 1
+}
+tensors {
+  dims: 32
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_0_BatchNorm_offset"
+  offset: 0
+  data_size: 32
+}
+tensors {
+  dims: 32
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_1_depthwise_BatchNorm_offset"
+  offset: 64
+  data_size: 32
+}
+tensors {
+  dims: 64
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_1_pointwise_BatchNorm_offset"
+  offset: 128
+  data_size: 64
+}
+tensors {
+  dims: 64
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_2_depthwise_BatchNorm_offset"
+  offset: 256
+  data_size: 64
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_2_pointwise_BatchNorm_offset"
+  offset: 384
+  data_size: 128
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_3_depthwise_BatchNorm_offset"
+  offset: 640
+  data_size: 128
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_3_pointwise_BatchNorm_offset"
+  offset: 896
+  data_size: 128
+}
+tensors {
+  dims: 128
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_4_depthwise_BatchNorm_offset"
+  offset: 1152
+  data_size: 128
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_4_pointwise_BatchNorm_offset"
+  offset: 1408
+  data_size: 256
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_5_depthwise_BatchNorm_offset"
+  offset: 1920
+  data_size: 256
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_5_pointwise_BatchNorm_offset"
+  offset: 2432
+  data_size: 256
+}
+tensors {
+  dims: 256
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_6_depthwise_BatchNorm_offset"
+  offset: 2944
+  data_size: 256
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_6_pointwise_BatchNorm_offset"
+  offset: 3456
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_7_depthwise_BatchNorm_offset"
+  offset: 4480
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_7_pointwise_BatchNorm_offset"
+  offset: 5504
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_8_depthwise_BatchNorm_offset"
+  offset: 6528
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_8_pointwise_BatchNorm_offset"
+  offset: 7552
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_9_depthwise_BatchNorm_offset"
+  offset: 8576
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_9_pointwise_BatchNorm_offset"
+  offset: 9600
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_10_depthwise_BatchNorm_offset"
+  offset: 10624
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_10_pointwise_BatchNorm_offset"
+  offset: 11648
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_11_depthwise_BatchNorm_offset"
+  offset: 12672
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_11_pointwise_BatchNorm_offset"
+  offset: 13696
+  data_size: 512
+}
+tensors {
+  dims: 512
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_12_depthwise_BatchNorm_offset"
+  offset: 14720
+  data_size: 512
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_12_pointwise_BatchNorm_offset"
+  offset: 15744
+  data_size: 1024
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_13_depthwise_BatchNorm_offset"
+  offset: 17792
+  data_size: 1024
+}
+tensors {
+  dims: 1024
+  data_type: DT_HALF
+  name: "_MobilenetV1_MobilenetV1_Conv2d_13_pointwise_BatchNorm_offset"
+  offset: 19840
+  data_size: 1024
+}
+tensors {
+  dims: 2
+  data_type: DT_INT32
+  name: "_MobilenetV1_Predictions_Reshape_shape"
+  offset: 21888
+  data_size: 2
+}
+tensors {
+  dims: 1001
+  data_type: DT_HALF
+  name: "_MobilenetV1_Logits_Conv2d_1c_1x1_biases"
+  offset: 21896
+  data_size: 1001
+}
+tensors {
+  dims: 1001
+  dims: 1024
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Logits_Conv2d_1c_1x1_weights"
+  offset: 23900
+  data_size: 1025024
+}
+tensors {
+  dims: 1024
+  dims: 1024
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_13_pointwise_weights"
+  offset: 2073948
+  data_size: 1048576
+}
+tensors {
+  dims: 1
+  dims: 1024
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_13_depthwise_depthwise_weights"
+  offset: 4171100
+  data_size: 9216
+}
+tensors {
+  dims: 1024
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_12_pointwise_weights"
+  offset: 4189532
+  data_size: 524288
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_12_depthwise_depthwise_weights"
+  offset: 5238108
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_11_pointwise_weights"
+  offset: 5247324
+  data_size: 262144
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_11_depthwise_depthwise_weights"
+  offset: 5771612
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_10_pointwise_weights"
+  offset: 5780828
+  data_size: 262144
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_10_depthwise_depthwise_weights"
+  offset: 6305116
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_9_pointwise_weights"
+  offset: 6314332
+  data_size: 262144
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_9_depthwise_depthwise_weights"
+  offset: 6838620
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_8_pointwise_weights"
+  offset: 6847836
+  data_size: 262144
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_8_depthwise_depthwise_weights"
+  offset: 7372124
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 512
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_7_pointwise_weights"
+  offset: 7381340
+  data_size: 262144
+}
+tensors {
+  dims: 1
+  dims: 512
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_7_depthwise_depthwise_weights"
+  offset: 7905628
+  data_size: 4608
+}
+tensors {
+  dims: 512
+  dims: 256
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_6_pointwise_weights"
+  offset: 7914844
+  data_size: 131072
+}
+tensors {
+  dims: 1
+  dims: 256
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_6_depthwise_depthwise_weights"
+  offset: 8176988
+  data_size: 2304
+}
+tensors {
+  dims: 256
+  dims: 256
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_5_pointwise_weights"
+  offset: 8181596
+  data_size: 65536
+}
+tensors {
+  dims: 1
+  dims: 256
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_5_depthwise_depthwise_weights"
+  offset: 8312668
+  data_size: 2304
+}
+tensors {
+  dims: 256
+  dims: 128
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_4_pointwise_weights"
+  offset: 8317276
+  data_size: 32768
+}
+tensors {
+  dims: 1
+  dims: 128
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_4_depthwise_depthwise_weights"
+  offset: 8382812
+  data_size: 1152
+}
+tensors {
+  dims: 128
+  dims: 128
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_3_pointwise_weights"
+  offset: 8385116
+  data_size: 16384
+}
+tensors {
+  dims: 1
+  dims: 128
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_3_depthwise_depthwise_weights"
+  offset: 8417884
+  data_size: 1152
+}
+tensors {
+  dims: 128
+  dims: 64
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_2_pointwise_weights"
+  offset: 8420188
+  data_size: 8192
+}
+tensors {
+  dims: 1
+  dims: 64
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_2_depthwise_depthwise_weights"
+  offset: 8436572
+  data_size: 576
+}
+tensors {
+  dims: 64
+  dims: 32
+  dims: 1
+  dims: 1
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_1_pointwise_weights"
+  offset: 8437724
+  data_size: 2048
+}
+tensors {
+  dims: 1
+  dims: 32
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_1_depthwise_depthwise_weights"
+  offset: 8441820
+  data_size: 288
+}
+tensors {
+  dims: 32
+  dims: 3
+  dims: 3
+  dims: 3
+  data_type: DT_HALF
+  name: "_MobilenetV1_Conv2d_0_weights"
+  offset: 8442396
+  data_size: 864
+}
+mem_arena {
+  mem_block {
+    mem_id: 20000
+    x: 224
+    y: 224
+  }
+  mem_block {
+    mem_id: 20001
+    x: 1792
+    y: 112
+  }
+  mem_block {
+    mem_id: 20002
+    x: 1792
+    y: 112
+  }
+}
+input_info {
+  name: "input"
+  dims: 1
+  dims: 224
+  dims: 224
+  dims: 3
+}
+output_info {
+  name: "MobilenetV1/Predictions/Reshape_1"
+  dims: 1
+  dims: 1001
+}
