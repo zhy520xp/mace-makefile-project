@@ -28,12 +28,12 @@ Mace是小米发布的移动端深度学习加速库。但是现在不支持离�
 (2).https://blog.csdn.net/adrian169/article/details/9051839  
     可以按照这个链接方法来编译  
 (3).把编译好的libprotoc.a和libprotobuf.a和libproto-lite.a拷贝到library/mace/目录下   
-(4).如果是使用CPU来运行mace，接下来按照1方法运行(注意如果是armv7a平台，请在Makefile中加上编译选项-mfloat-abi=softfp -mfpu=neon，硬浮点的话-     mfloat-abi=hard)
+(4).如果是使用CPU来运行mace，接下来按照1方法运行(注意如果是armv7a平台，请在Makefile中加上编译选项-mfloat-abi=softfp -mfpu=neon，硬浮点的话-     mfloat-abi=hard)  
 (5).如果是使用GPU来运行mace，参考2，只是在运行demo前，需要先把opencl的库libopencl.so，libmali.so放到opencl_library下。  
     特别需要注意的是，嵌入式端运行GPU需要保证GPU的驱动加载好了，不然运行demo的时候会“Kernel module may not have been loaded”的错误。
     如果GPU运行时除了libopencl.so，libmali.so之外还有其他动态库，请在mace/core/runtime/opencl/opencl_wrapper.cc的278行加上库路径即可。  
  
  3.通过unit_test.cpp中可以看出，本工程现在只提供了mobilenetv1的测试。运行mace需要的权重文件和网络配置文件分别为mobilenetv1_v1.data和mobilenetv1.proto。特别需要注意的是部署在gpu上的model和部署到cpu上的model是不能混用的。主要原因是因为gpu模型运算是f16，cpu是f32。
  
- 4.如果你需要测试其他网络，需要把caffe或者tensorflow模型转换成*.data和*.pb文件，具体怎么做请参考https://mace.readthedocs.io/en/latest/getting_started/how_to_build.html  
+ 4.如果你需要测试其他网络，需要把caffe或者tensorflow模型转换成*.data和*.pb文件，具体怎么做请参    考https://mace.readthedocs.io/en/latest/getting_started/how_to_build.html  
    模型转换ok之后，请修改unit_test.cpp中对应代码。
