@@ -215,7 +215,7 @@ OBJ_C := $(patsubst %.c, %.o, $(C_SOURCE))
 
 DEFINE_MACRO := 
 ifeq ($(PLATFORM),CPU)
-CPPFLAGS := -O3 -std=c++11 -fpermissive -DMACE_ENABLE_NEON -DMACE_ENABLE_OPENMP
+CPPFLAGS := -O3 -std=c++11 -fpermissive -DMACE_ENABLE_NEON -DMACE_ENABLE_OPENMP -fopenmp
 endif
 
 ifeq ($(PLATFORM),GPU)
