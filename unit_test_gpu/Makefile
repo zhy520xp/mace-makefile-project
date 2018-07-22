@@ -22,7 +22,7 @@ OBJ_CPP := $(patsubst %.cpp, %.o, $(CXX_SOURCE))
 
 DEFINE_MACRO := 
 
-CPPFLAGS := -std=c++11 
+CPPFLAGS := -std=c++11 -fopenmp
 CPPFLAGS += $(DEP_INC_DIR) $(DEFINE_MACRO) 
 
 $(TARGET_EXE):$(OBJ_CPP)
