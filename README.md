@@ -36,6 +36,6 @@ Mace是小米发布的移动端深度学习加速库。但是现在不支持离�
  3.通过unit_test.cpp中可以看出，本工程现在只提供了mobilenetv1的测试。运行mace需要的权重文件和网络配置文件分别为mobilenetv1_v1.data和mobilenetv1.proto。特别需要注意的是部署在gpu上的model和部署到cpu上的model是不能混用的。主要原因是因为gpu模型运算是f16，cpu是f32。
  
  4.如果你需要测试其他网络，需要把caffe或者tensorflow模型转换成*.data和*.pb文件，具体怎么做请参    考https://mace.readthedocs.io/en/latest/getting_started/how_to_build.html  
-   模型转换ok之后，请修改unit_test.cpp中对应代码。
+   模型转换ok之后，请修改unit_test.cpp中对应代码。  
  5.https://github.com/conansherry/convert_model
  这个链接可以转caffe模型，不需要docker那一套东西
